@@ -704,6 +704,152 @@ The code is as follows:
 % r.10 CHAPTER
 \chapter{Viewport}
 
+In \href{https://github.com/MIMBCD-UI/prototype-cornerstone}{\textit{prototype-cornerstone}}, an \href{https://github.com/cornerstonejs/cornerstone/wiki/enabled-element}{enabled element} is a DOM component (e.g. \textit{<div>}) which \href{https://github.com/MIMBCD-UI/prototype-cornerstone}{\textit{prototype-cornerstone}} displays an interactive medical image inside of. Internal API call used by \href{https://github.com/MIMBCD-UI/prototype-cornerstone}{\textit{prototype-cornerstone}} to add an internal data structure for an \href{https://github.com/cornerstonejs/cornerstone/wiki/enabled-element}{enabled element}. Internal API functions are not intended to be called by code external to cornerstone.
+
+\hfill
+
+The calls are done by the \textit{addEnabledElement} function as follows:
+
+\hfill
+
+\begin{lstlisting}
+function addEnabledElement(enabledElement);
+\end{lstlisting}
+
+\hfill
+
+The \textit{enabledElement} parameter is an internal data structure associated with an \href{https://github.com/cornerstonejs/cornerstone/wiki/enabled-element}{enabled element}. The function returns nothing.
+
+\hfill
+
+The \textit{getDefaultViewport} API call is an internal API that returns a viewport object with reasonable defaults given a canvas and image object:
+
+\hfill
+
+\begin{lstlisting}
+function getDefaultViewport(canvas, image);
+\end{lstlisting}
+
+\hfill
+
+The \textit{canvas} parameter is the canvas element created for an \href{https://github.com/cornerstonejs/cornerstone/wiki/enabled-element}{enabled element}. The \textit{image} parameter is the image object to be displayed in the canvas. The function returns a \textit{viewport object} with the image centred and scaled to fit all pixels.
+
+\hfill
+
+The \textit{getDefaultViewportForImage} API call is used to calculate the default \href{https://github.com/cornerstonejs/cornerstone/wiki/viewport}{Viewport} if an image were to be displayed in an enabled element. The default \href{https://github.com/cornerstonejs/cornerstone/wiki/viewport}{Viewport} will set the WW/WC to the default values from the image object and reset the transform so the image can fit on the window.
+
+\hfill
+
+The calls are done by the \textit{getDefaltViewportForImage} function as follows:
+
+\hfill
+
+\begin{lstlisting}
+function getDefaltViewportForImage(element, image);
+\end{lstlisting}
+
+\hfill
+
+The \textit{element} parameter is a DOM element that is enabled. The \textit{image} parameter is an image to use to calculate the default viewport. The function returns a \textit{viewport object}.
+
+\hfill
+
+The \textit{setViewport} API call is used to modify \href{https://github.com/cornerstonejs/cornerstone/wiki/viewport}{Viewport} properties for an enabled element. Calling this method causes the image to be updated to reflect the changes.
+
+\hfill
+
+The calls are done by the \textit{setViewport} function as follows:
+
+\hfill
+
+\begin{lstlisting}
+function setViewport(element, viewport);
+\end{lstlisting}
+
+\hfill
+
+Again, the \textit{element} parameter is a DOM element of an enabled element to set the viewport of. The \textit{viewport} parameter, in this case, is an object with viewport properties. The function returns nothing.
+
+\hfill
+
+A \textit{ToolStateManagers} expose their API through a JavaScript object with several functions so do it. The \href{https://github.com/MIMBCD-UI/prototype-cornerstone}{\textit{prototype-cornerstone}} also allows to remove annotations (\textbf{Freehand}) supported by this methods. However, there is currently no ability to toggle hide/show of the annotations and measurements. The \href{https://rawgit.com/chafey/cornerstoneTools/master/examples/clearToolData/index.html#}{\textbf{Tool Management}} page demonstrates how to clear single or multiple tool states.
+
+\hfill
+
+Clear is only implemented for the \textit{imageId} specific state managers. Therefore, a possible solution is as follows:
+
+\hfill
+
+\begin{lstlisting}
+var toolStateManager = cornerstoneTools.globalImageIdSpecificToolStateManager;
+\end{lstlisting}
+
+\hfill
+
+Instead of \textit{getElementToolStateManager} before using the clear function.
+
+\hfill
+
+The \textit{get} function is called by a tool to get tool \textit{data} for a specific \textit{element} and \textit{toolType}:
+
+\begin{lstlisting}
+function get(element, toolType);
+\end{lstlisting}
+
+\hfill
+
+One more time, the \textit{element} parameter is a DOM element to be \href{https://github.com/cornerstonejs/cornerstone/wiki/enabled-element}{enabled}. The \textit{toolType} is an unique string identifying for this tool data. This needs to be unique to avoid conflicts with other tools so consider using a GUID, project name or other strings as part of the \textit{toolType}. The function returns a JavaScript object containing the tool data or undefined if there is no associated tool data.
+
+\hfill
+
+The \textit{set} function is called by a tool to set tool \textit{data} for a specific \textit{element} and \textit{toolType}:
+
+\hfill
+
+\begin{lstlisting}
+function set(element, toolType, data);
+\end{lstlisting}
+
+\hfill
+
+Again, the \textit{element} parameter is a DOM element to be \href{https://github.com/cornerstonejs/cornerstone/wiki/enabled-element}{enabled}. Also, The \textit{toolType} is an unique string identifying for this tool data. This needs to be unique to avoid conflicts with other tools so consider using a GUID, project name or other strings as part of the \textit{toolType}. The function returns a JavaScript object containing the tool data or undefined if there is no associated tool data. But this time, we have a \textit{data} parameter with the purpose of having a JavaScript object containing the tool data. The function returns nothing.
+
+\hfill
+
+The \textit{loadImage} API call is used to initiate a load of an image given an \textit{imageId}. Our \href{https://github.com/MIMBCD-UI/prototype-cornerstone}{\textit{prototype-cornerstone}} first checks the cache to see if this \textit{imageId} was previously loaded. If the \textit{imageId} is not in the cache, \href{https://github.com/MIMBCD-UI/prototype-cornerstone}{\textit{prototype-cornerstone}} attempts to locate a suitable \textit{ImageLoader} for the \textit{imageId} and requests the image to be loaded. Since image loading is an asynchronous operation, this function returns a \textit{Promise} which will resolve to an image object on success. Typical workflow is to call \textit{displayImage()} after a successful load. Note that this function will attempt to locate the \textit{imageId} in the cache but it will not add loaded images to the cache.
+
+\hfill
+
+The use of \textit{loadAndCacheImage()} if you would like to cache the loaded images is important for this and you should do as follows:
+
+\hfill
+
+\begin{lstlisting}
+function loadImage(imageId);
+\end{lstlisting}
+
+\hfill
+
+The \textit{imageId} parameter is the \textit{imageId} to load. The function returns a promise which resolves to an Image object once loaded.
+
+\hfill
+
+The \href{https://github.com/MIMBCD-UI/prototype-cornerstone/blob/master/src/js/loadStudy.js}{path} for our loadStudy.js is as follows:
+
+\hfill
+
+\begin{lstlisting}
+src/js/loadStudy.js
+\end{lstlisting}
+
+\hfill
+
+You can always edit the \href{https://github.com/MIMBCD-UI/prototype-cornerstone/blob/master/src/js/loadStudy.js#L74}{\textit{imageId}} and \href{https://github.com/MIMBCD-UI/prototype-cornerstone/blob/master/src/js/loadStudy.js#L85}{\textit{image.imageId}} conditions and variables on this file. 
+
+\hfill
+
+To conclude, each enabled element has a viewport which describes how the image should be rendered. The viewport for an enabled element can be obtained via the \textit{getViewport()} function and set using the \textit{setViewport()} function.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % -------------------------------------------------- %
 % -------------------------------------------------- %
