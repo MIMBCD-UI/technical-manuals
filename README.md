@@ -41,6 +41,10 @@ This repository was created by [Francisco Maria Calisto](http://www.franciscocal
 
 - [Francisco Maria Calisto](http://www.franciscocalisto.me/) ([FMCalisto](https://github.com/FMCalisto))
 
+### Licens
+
+Licensed under the [GNU General Public License v3.0](LICENSE) License.
+
 ## Sponsors
 
 <span class="image">
