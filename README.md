@@ -6,7 +6,7 @@
 
 This is a custom version of [LaTeX Tufte Template](https://www.overleaf.com/latex/templates/book-design-inspired-by-edward-tufte/gcfbtdjfqdjh) integrated with the [Tufte-LaTeX] (https://tufte-latex.github.io/tufte-latex/) templates.
 
-This [Technical Manuals](https://github.com/MIMBCD-UI/technical-manuals) are related to the [MIMBCD-UI](https://github.com/MIMBCD-UI/) project regarding the [prototype-cornerstone](https://github.com/MIMBCD-UI/prototype-cornerstone) repository. We are providing publicly the hereby repository to support our comminity on how to do a [Technical Manuals](https://github.com/MIMBCD-UI/technical-manuals) of this kind. Also, to improve our document by the community's feedback. So please you would like to improve our manual just open a [New issue](https://github.com/MIMBCD-UI/technical-manuals/issues/new).
+This [Technical Manuals](https://github.com/MIMBCD-UI/technical-manuals) are related to the [MIMBCD-UI](https://github.com/MIMBCD-UI/) project regarding the [prototype-cornerstone](https://github.com/MIMBCD-UI/prototype-cornerstone) repository. We are providing publicly the hereby repository to support our comminity on how to do a [Technical Manuals](https://github.com/MIMBCD-UI/technical-manuals) of this kind. Also, to improve our document by the community's feedback. So please, if you would like to improve our manual just open a [New issue](https://github.com/MIMBCD-UI/technical-manuals/issues/new).
 
 ## Quick Start
 
