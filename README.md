@@ -33,6 +33,14 @@ pdflatex main
 pdflatex main
 ```
 
+## About
+
+This repository was created by [Francisco Maria Calisto](http://www.franciscocalisto.me/) ([FMCalisto](https://github.com/FMCalisto)) using the basics of the [LaTeX Tufte Template](https://www.overleaf.com/latex/templates/book-design-inspired-by-edward-tufte/gcfbtdjfqdjh).
+
+### Authors
+
+- [Francisco Maria Calisto](http://www.franciscocalisto.me/) ([FMCalisto](https://github.com/FMCalisto))
+
 ## Sponsors
 
 <span class="image">
